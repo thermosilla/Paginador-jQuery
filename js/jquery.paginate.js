@@ -19,12 +19,12 @@
 		start 		: 1,
 		display  	: 5,
 		border					: true,
-		border_color			: '#006CB5',
-		text_color  			: '#fff',
-		background_color    	: '#006CB5',
-		border_hover_color		: '#666',
-		text_hover_color  		: '#666',
-		background_hover_color	: '#fff',
+		border_color			: '#EBEBEB',
+		text_color  			: '#003399',
+		background_color    	: '#EBEBEB',
+		border_hover_color		: '#FB8B39',
+		text_hover_color  		: '#fff',
+		background_hover_color	: '#FB8B39',
 		rotate      			: true,
 		images					: true,
 		mouse					: 'slide',
@@ -46,7 +46,7 @@
 			var snextclass 		= 'jPag-snext';
 			var nextclass 		= 'jPag-next';
 		}
-		var _first		= $(document.createElement('a')).addClass('jPag-first').html('Inicio');
+		var _first		= $(document.createElement('a')).addClass('jPag-first').html('<<');
 
 		if(o.rotate){
 			if(o.images) var _rotleft	= $(document.createElement('span')).addClass(spreviousclass);
@@ -80,7 +80,7 @@
 			else var _rotright	= $(document.createElement('span')).addClass(snextclass).html('&raquo;');
 		}
 
-		var _last		= $(document.createElement('a')).addClass('jPag-last').html('Fin');
+		var _last		= $(document.createElement('a')).addClass('jPag-last').html('>>');
 		var _divwrapright	= $(document.createElement('div')).addClass('jPag-control-front');
 		_divwrapright.append(_rotright).append(_last);
 

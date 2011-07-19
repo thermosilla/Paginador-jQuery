@@ -2,7 +2,7 @@
     height:34px;
     position:relative;
     color:#a5a5a5;
-    font-size:small;   
+    font-size:small;
 	width:100%;
 }
 .jPaginate a{
@@ -104,5 +104,4 @@ span.jPag-sprevious-img{
 span.jPag-snext-img{
     background:transparent url(../images/snext.png) no-repeat center left;
             }
-
 
