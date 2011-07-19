@@ -5,86 +5,61 @@
  * @licence: GNU/GPLv2.
  */
 
-//#TODO: Seguir las buenas prácticas de creación de plugins
-
 (function($) {
 
-//Entrega el numero total de hijos del elemento padre
-	$.fn.contar = function(){
-		return $(this).find('*').length;
-	};
+	$.fn.extend({
+		paginador : function(options){
+			var defaults = {
+				'elemento' : '.elemento',
+				'elementos': 5,
+				'raiz' : 'pag'
+			};
 
-	$.fn.paginar = function(){
-		var args = arguments[0];
-		var total = $(this).contar();
+			var options = $.extend(defaults, options);
 
-		var paginas = total / args.elementos;
+			var o = options;
+			var obj = $(this);
+			var items = $(o.elemento, obj);
 
-		if(parseInt(paginas)!=paginas){paginas = parseInt(paginas)+1}
+			var total = items.length;
+			var parentSelector = "#"+o.raiz;
 
-		$(this).creaPagina({elementos: args.elementos});
+			this.cambiaPagina = function(pag){
+				var ini = o.elementos*pag;
+				var fin = ini + o.elementos;
 
-		return paginas;
-	};
+				var content = items.slice(ini,fin);
 
-//Divide el selector en la cantidad de páginas requerida
-//#OPTIMIZE: Mejorar mecanismo de creación de páginas
-	$.fn.creaPagina = function(){
-		var args = arguments[0];
-		var maximo = parseInt(args.elementos);
-		var elems = $(this).find('*').slice(0,maximo);
+				if ($(parentSelector).length == 0)
+				{
 
+					obj.before("<div id='"+o.raiz+"'></div>");
+				}
 
-		$(this).before("<div id='pag'></div>");
+				$(parentSelector).html("");
 
-		elems.each(function(i,e){
-			$("#pag").append($(this).clone());
-		});
+				content.each(function(){
+					$(parentSelector).append($(this).clone());
+				});
 
-		$(this).hide()
-	};
+				obj.hide();
 
-//Mueve la página
-//#IMPROVE: Mejorar para no requerir cantidad de elementos
-	$.fn.cambiaPagina = function(){
-		var args = arguments[0];
-		var pagina = args.pagina -1 ;
-		var elementos = args.elementos;
-		var elems = $(this).find('*');
-		var maximo = elems.length - 1;
+				return this;
+			};
 
-		var inicio = pagina*elementos;
-		var fin = inicio + elementos;
+			this.getPaginas = function(){
+				var paginas = total / o.elementos;
 
-		var content = elems.slice(inicio,fin);
+				if(parseInt(paginas)!=paginas){paginas = parseInt(paginas)+1}
 
-		$("#pag").html("");
+				return paginas;
+			};
 
-		content.each(function(i,e){
-			$("#pag").append($(this).clone());
-		});
+			this.cambiaPagina(0);
 
-	};
-
-
-	var methods = {
-		contarItems : function(options){
-
-			return $(this).find(settings.item).length;
+			return this;
 		}
-	};
-
-	$.fn.paginador = function(method, options){
-
-		var settings = {
-			'elementos' : 5,
-			'item' : '.item',
-			'total' : '0'
-		};
-
-
-		return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-	};
+	});
 
 })(jQuery);
 
