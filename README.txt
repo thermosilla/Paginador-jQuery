@@ -7,3 +7,7 @@ TODO:
 * Navegador de páginas
 * Efectos de transición personalizables
 
+Changelog
+
+ver0.9
+*Versión inicial del plugin

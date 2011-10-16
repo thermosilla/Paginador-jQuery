@@ -1,6 +1,6 @@
 /*!
  * Plugin paginador para JQuery
- * @version: 1.0
+ * @version: 0.9
  * @author: 2011 Tomás Hermosilla
  * @licence: GNU/GPLv2.
  */
